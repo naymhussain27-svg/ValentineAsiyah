@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Forever 💜</title>
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
+
+
+
+<style>
+
+body {
+
+    margin: 0;
+
+    font-family: 'Poppins', sans-serif;
+
+    background: linear-gradient(135deg, #4b0082, #7b2cbf, #c77dff);
+
+    color: white;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    cursor: none;
+
+}
+
+
+
+.container {
+
+    padding: 80px 20px;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+
+h1 {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 3rem;
+
+}
+
+
+
+p {
+
+    font-size: 1.2rem;
+
+    max-width: 600px;
+
+    margin: 20px auto;
+
+}
+
+
+
+button {
+
+    padding: 12px 25px;
+
+    margin: 10px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+
+.yes {
+
+    background: white;
+
+    color: #7b2cbf;
+
+}
+
+
+
+.no {
+
+    background: #2d0066;
+
+    color: white;
+
+}
+
+
+
+button:hover {
+
+    transform: scale(1.1);
+
+}
+
+
+
+.falling {
+
+    position: fixed;
+
+    top: -10%;
+
+    font-size: 24px;
+
+    animation: fall linear forwards;
+
+    z-index: 1;
+
+}
+
+
+
+@keyframes fall {
+
+    to { transform: translateY(110vh); }
+
+}
+
+
+
+.glow {
+
+    position: fixed;
+
+    width: 6px;
+
+    height: 6px;
+
+    background: rgba(255,255,255,0.7);
+
+    border-radius: 50%;
+
+    animation: glowFloat 8s linear infinite;
+
+    z-index: 0;
+
+}
+
+
+
+@keyframes glowFloat {
+
+    from { transform: translateY(100vh); opacity: 0; }
+
+    50% { opacity: 1; }
+
+    to { transform: translateY(-10vh); opacity: 0; }
+
+}
+
+
+
+.cursor-dot {
+
+    position: fixed;
+
+    width: 10px;
+
+    height: 10px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+}
+
+
+
+.sparkle {
+
+    position: fixed;
+
+    font-size: 12px;
+
+    pointer-events: none;
+
+    animation: sparkleFade 1s linear forwards;
+
+    z-index: 9999;
+
+}
+
+
+
+@keyframes sparkleFade {
+
+    to { opacity: 0; transform: translateY(-10px); }
+
+}
+
+
+
+.letter {
+
+    position: fixed;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%) scale(0);
+
+    background: white;
+
+    color: #4b0082;
+
+    padding: 30px;
+
+    width: 80%;
+
+    max-width: 420px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 0 30px rgba(255,255,255,0.8);
+
+    transition: transform 0.5s ease;
+
+    z-index: 10;
+
+}
+
+
+
+.letter.show {
+
+    transform: translate(-50%, -50%) scale(1);
+
+}
+
+
+
+.signature {
+
+    margin-top: 20px;
+
+    font-family: 'Great Vibes', cursive;
+
+    font-size: 1.8rem;
+
+    color: #7b2cbf;
+
+}
+
+
+
+.firework {
+
+    position: fixed;
+
+    font-size: 20px;
+
+    animation: explode 1s ease-out forwards;
+
+    z-index: 999;
+
+}
+
+
+
+@keyframes explode {
+
+    to {
+
+        transform: translate(var(--x), var(--y));
+
+        opacity: 0;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="container">
+
+    <h1>Happy Valentine's Day 💜</h1>
+
+    <p>I will always love you, till we are 33 — I promise.</p>
+
+    <h2>Will You Be My Forever? 💍</h2>
+
+    <button class="yes" onclick="yesClick()">Yes 💜</button>
+
+    <button class="no" onmouseover="moveButton()">No 😏</button>
+
+</div>
+
+
+
+<div class="letter" id="loveLetter">
+
+    <h2>My Love 💌</h2>
+
+    <p>
+
+        From the moment you walked into my life, everything became brighter.
+
+        You are my safe place, my adventure, my dream.
+
+        I promise to choose you every single day.
+
+        Forever starts with us.
+
+    </p>
+
+    <div class="signature">From Monkey 💜</div>
+
+</div>
+
+
+
+<script>
+
+// Falling flowers
+
+function createFlower() {
+
+    var flower = document.createElement("div");
+
+    flower.className = "falling";
+
+    flower.innerHTML = Math.random() > 0.5 ? "🌷" : "🌹";
+
+    flower.style.left = Math.random() * 100 + "vw";
+
+    flower.style.animationDuration = (Math.random() * 5 + 5) + "s";
+
+    document.body.appendChild(flower);
+
+    setTimeout(function(){ flower.remove(); }, 10000);
+
+}
+
+setInterval(createFlower, 500);
+
+
+
+// Glowing particles
+
+function createGlow() {
+
+    var glow = document.createElement("div");
+
+    glow.className = "glow";
+
+    glow.style.left = Math.random() * 100 + "vw";
+
+    glow.style.animationDuration = (Math.random() * 5 + 5) + "s";
+
+    document.body.appendChild(glow);
+
+    setTimeout(function(){ glow.remove(); }, 8000);
+
+}
+
+setInterval(createGlow, 300);
+
+
+
+// Yes click
+
+function yesClick() {
+
+    document.getElementById("loveLetter").classList.add("show");
+
+    launchFireworks();
+
+}
+
+
+
+// Move No button
+
+function moveButton() {
+
+    var btn = document.querySelector(".no");
+
+    btn.style.position = "absolute";
+
+    btn.style.left = Math.random() * 80 + "vw";
+
+    btn.style.top = Math.random() * 80 + "vh";
+
+}
+
+
+
+// Fireworks
+
+function launchFireworks() {
+
+    for (var i = 0; i < 30; i++) {
+
+        var fw = document.createElement("div");
+
+        fw.className = "firework";
+
+        fw.innerHTML = "✨";
+
+        fw.style.left = "50%";
+
+        fw.style.top = "50%";
+
+        fw.style.setProperty('--x', (Math.random() - 0.5) * 500 + "px");
+
+        fw.style.setProperty('--y', (Math.random() - 0.5) * 500 + "px");
+
+        document.body.appendChild(fw);
+
+        setTimeout(function(){ fw.remove(); }, 1000);
+
+    }
+
+}
+
+
+
+// Glitter cursor
+
+var cursor = document.createElement("div");
+
+cursor.className = "cursor-dot";
+
+document.body.appendChild(cursor);
+
+
+
+document.addEventListener("mousemove", function(e){
+
+    cursor.style.left = e.clientX + "px";
+
+    cursor.style.top = e.clientY + "px";
+
+
+
+    var sparkle = document.createElement("div");
+
+    sparkle.className = "sparkle";
+
+    sparkle.innerHTML = "✨";
+
+    sparkle.style.left = e.clientX + "px";
+
+    sparkle.style.top = e.clientY + "px";
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(function(){ sparkle.remove(); }, 1000);
+
+});
+
+</script>
+
+
+
+</body>
+
+</html>
